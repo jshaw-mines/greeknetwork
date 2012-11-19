@@ -20,7 +20,7 @@
     
     <Button 
     android:id="@+id/view_event_list"
-    android:text="Create a Smart Grocery"
+    android:text="View Event List"
     android:layout_height="wrap_content"
   	android:layout_width="wrap_content"
   	android:layout_below="@id/view_member_list"
