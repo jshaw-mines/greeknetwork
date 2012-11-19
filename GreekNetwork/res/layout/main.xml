@@ -1,14 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="@string/hello_world"
-        tools:context=".GreekNetworkMain" />
-
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+   
+    <TextView 
+   	android:id="@+id/welcome_text"
+  	android:text="Welcom to Greek Network!"
+   	android:layout_width="fill_parent"
+  	android:layout_height="wrap_content"/>
+  	
+  	<Button 
+  	android:id="@+id/view_member_list"
+  	android:text="View Members List"
+  	android:layout_height="wrap_content"
+  	android:layout_width="wrap_content"
+  	android:layout_below="@id/welcome_text"
+  	android:layout_centerHorizontal="true"/>
+    
+    <Button 
+    android:id="@+id/view_event_list"
+    android:text="Create a Smart Grocery"
+    android:layout_height="wrap_content"
+  	android:layout_width="wrap_content"
+  	android:layout_below="@id/view_member_list"
+  	android:layout_centerHorizontal="true"/>
 </RelativeLayout>
