@@ -2,6 +2,7 @@ package com.jshaw.greeknetwork;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -14,8 +15,8 @@ public class GreekNetworkMain extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_event);
         
-        Button a = (Button)findViewById(R.id.view_member_list);
-        a.setOnClickListener(new OnClickListener() 
+        Button member_list = (Button)findViewById(R.id.view_member_list);
+        member_list.setOnClickListener(new OnClickListener() 
         {
 			@Override
 			public void onClick(View v) {
@@ -23,7 +24,16 @@ public class GreekNetworkMain extends Activity {
 				startActivity(i);
 			}	
         });
-        Button b = (Button)findViewById(R.id.view_event_list);
+        
+        Button event_list = (Button)findViewById(R.id.view_event_list);
+        event_list.setOnClickListener(new OnClickListener ()
+        {
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(GreekNetworkMain.this, EventList.class);
+				startActivity(i);
+			}      	
+        });
     }
 
     @Override
