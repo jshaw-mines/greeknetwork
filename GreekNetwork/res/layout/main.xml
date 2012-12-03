@@ -6,9 +6,11 @@
    
     <TextView 
    	android:id="@+id/welcome_text"
-  	android:text="Welcom to Greek Network!"
-   	android:layout_width="fill_parent"
-  	android:layout_height="wrap_content"/>
+  	android:text="Welcome to Greek Network!"
+   	android:layout_width="wrap_content"
+  	android:layout_height="wrap_content"
+  	android:layout_centerHorizontal="true"
+  	android:textAppearance="?android:attr/textAppearanceLarge" />
   	
   	<Button 
   	android:id="@+id/view_member_list"
@@ -25,4 +27,5 @@
   	android:layout_width="wrap_content"
   	android:layout_below="@id/view_member_list"
   	android:layout_centerHorizontal="true"/>
+    
 </RelativeLayout>
