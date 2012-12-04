@@ -71,7 +71,7 @@ public class GreekHelper extends SQLiteOpenHelper {
 	
 	public Cursor getMembers()
 	{
-		return getReadableDatabase().rawQuery("SELECT * FROM "+MEMBERS_TABLE, null);	
+		return getReadableDatabase().rawQuery("SELECT * FROM "+MEMBERS_TABLE+" ORDER BY member_name ASC", null);	
 	}
 	
 	public Cursor getMember(int id)
