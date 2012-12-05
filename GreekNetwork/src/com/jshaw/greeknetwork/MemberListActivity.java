@@ -101,7 +101,7 @@ public class MemberListActivity extends ListActivity {
 	  
 		MemberHolder(View row) 
 		{
-			name=(TextView)row.findViewById(R.id.member_name);
+			name=(TextView)row.findViewById(R.id.name);
 			year=(TextView)row.findViewById(R.id.year);
 			position=(TextView)row.findViewById(R.id.position);
 		}

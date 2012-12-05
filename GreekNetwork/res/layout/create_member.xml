@@ -12,25 +12,25 @@
         <TableRow>
             <TextView android:text="Name:"/>
             <EditText 
-                android:id="@+id/item_name"
+                android:id="@+id/member_name"
                 android:layout_span="3"/>
         </TableRow>
         
         <TableRow>
             <TextView android:text="Year:"/>
             <EditText 
-                android:id="@+id/item_name"
+                android:id="@+id/member_year"
                 android:layout_span="3"/>
         </TableRow>
         
         <TableRow>
             <TextView android:text="Position"/>
             <EditText 
-                android:id="@+id/item_name"
+                android:id="@+id/member_pos"
                 android:layout_span="3"/>
         </TableRow>
         
-        <EditText android:id="@+id/comments"
+        <EditText android:id="@+id/member_comments"
              	android:inputType="textMultiLine"
              	android:gravity="top"
              	android:lines="3"

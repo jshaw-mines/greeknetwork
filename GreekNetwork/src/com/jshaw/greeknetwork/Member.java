@@ -17,6 +17,14 @@ public class Member {
 		ID = iD;
 	}
 	
+	public Member(String name, String year, String position, String comments) 
+	{
+		this.name = name;
+		this.year = year;
+		this.position = position;
+		this.comments = comments;
+	}
+	
 	public String getName() 
 	{
 		return name;

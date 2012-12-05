@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class GreekHelper extends SQLiteOpenHelper {
 
 	//database info
-	private static final int DATABASE_VERSION = 0;
+	private static final int DATABASE_VERSION = 1;
 	private static final String DATABASE_NAME = "greek.db";
 	
 	//table names
