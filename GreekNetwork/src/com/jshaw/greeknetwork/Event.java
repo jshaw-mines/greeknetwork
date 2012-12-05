@@ -15,6 +15,13 @@ public class Event {
 		ID = iD;
 	}
 	
+	public Event(String name, long date, String details) 
+	{
+		this.name = name;
+		this.date = date;
+		this.details = details;
+	}
+	
 	public String getName() 
 	{
 		return name;

@@ -35,13 +35,12 @@ public class EventListActivity extends ListActivity {
 	public void onCreate(Bundle save)
 	{
 		super.onCreate(save);
-		this.setContentView(R.layout.member_list);
+		this.setContentView(R.layout.event_list);
 		
 		cal = Calendar.getInstance();
 		
 		helper = new GreekHelper(this);
 		model = helper.getEvents(cal.getTimeInMillis()-DAY_LENGTH);
-		Date date = new Date();
 		
     	startManagingCursor(model);
     	adapter = new EventAdapter(model);

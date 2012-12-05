@@ -21,6 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".CreateMemberActivity"></activity>
+        <activity android:name=".CreateEventActivity"></activity>
         <activity android:name=".EventListActivity"></activity>
         <activity android:name=".MemberListActivity"></activity>
         <activity android:name=".ProfileActivity"></activity>

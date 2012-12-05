@@ -46,4 +46,11 @@ public class CreateMemberActivity extends Activity {
 			
 		});
 	}
+	
+	@Override
+	public void onDestroy()
+	{
+		super.onDestroy();
+		helper.close();
+	}
 }
