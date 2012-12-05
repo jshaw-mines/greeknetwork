@@ -40,7 +40,7 @@ public class EventListActivity extends ListActivity {
 		cal = Calendar.getInstance();
 		
 		helper = new GreekHelper(this);
-		model = helper.getEvents(cal.getTimeInMillis()-DAY_LENGTH);
+		model = helper.getEvents(cal.getTimeInMillis());
 		
     	startManagingCursor(model);
     	adapter = new EventAdapter(model);

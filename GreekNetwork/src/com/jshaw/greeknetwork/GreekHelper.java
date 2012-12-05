@@ -83,7 +83,7 @@ public class GreekHelper extends SQLiteOpenHelper {
 	public Cursor getEvents(long exp)
 	{
 		String[] temp = {String.valueOf(exp)};
-		return getReadableDatabase().query(EVENTS_TABLE, null, DATE+" >= ?", temp, null, null, null);	
+		return getReadableDatabase().query(EVENTS_TABLE, null, DATE+" > ?", temp, null, null, null);	
 	}
 	
 	public Cursor getEvent(String id)

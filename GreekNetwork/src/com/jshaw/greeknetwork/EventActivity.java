@@ -32,8 +32,8 @@ public class EventActivity extends Activity {
 		c.moveToFirst();
 		
 		name = (TextView)findViewById(R.id.name);
-		date = (TextView)findViewById(R.id.year);
-		details = (TextView)findViewById(R.id.position);
+		date = (TextView)findViewById(R.id.date);
+		details = (TextView)findViewById(R.id.detials);
 		
 		name.setText(helper.getName(c));
 		date.setText(DateFormat.getInstance().format(new Date(helper.getDate(c))));
