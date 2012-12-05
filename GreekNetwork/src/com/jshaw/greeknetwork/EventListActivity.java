@@ -3,7 +3,7 @@ package com.jshaw.greeknetwork;
 import android.app.ListActivity;
 import android.os.Bundle;
 
-public class EventList extends ListActivity {
+public class EventListActivity extends ListActivity {
 
 	@Override
 	public void onCreate(Bundle save)

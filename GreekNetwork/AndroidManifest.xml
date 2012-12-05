@@ -12,7 +12,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".GreekNetworkMain"
+            android:name=".GreekNetworkMainActivity"
             android:label="@string/title_activity_greek_network_main" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,6 +20,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".CreateMemberActivity"></activity>
+        <activity android:name=".EventListActivity"></activity>
+        <activity android:name=".MemberListActivity"></activity>
+        <activity android:name=".ProfileActivity"></activity>
+        <activity android:name=".EventActivity"></activity>
     </application>
 
 </manifest>

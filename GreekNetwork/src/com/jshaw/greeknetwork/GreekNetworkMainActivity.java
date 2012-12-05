@@ -8,19 +8,20 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-public class GreekNetworkMain extends Activity {
-
+public class GreekNetworkMainActivity extends Activity 
+{
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) 
+    {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.create_event);
+        setContentView(R.layout.main);
         
         Button member_list = (Button)findViewById(R.id.view_member_list);
         member_list.setOnClickListener(new OnClickListener() 
         {
 			@Override
 			public void onClick(View v) {
-				Intent i = new Intent(GreekNetworkMain.this, MemberList.class);
+				Intent i = new Intent(GreekNetworkMainActivity.this, MemberListActivity.class);
 				startActivity(i);
 			}	
         });
@@ -30,15 +31,9 @@ public class GreekNetworkMain extends Activity {
         {
 			@Override
 			public void onClick(View v) {
-				Intent i = new Intent(GreekNetworkMain.this, EventList.class);
+				Intent i = new Intent(GreekNetworkMainActivity.this, EventListActivity.class);
 				startActivity(i);
 			}      	
         });
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
     }
 }

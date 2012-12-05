@@ -8,12 +8,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.CursorAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class MemberList extends ListActivity {
+public class MemberListActivity extends ListActivity {
 
 	private Cursor model;
 	private MemberAdapter adapter;
@@ -34,12 +36,22 @@ public class MemberList extends ListActivity {
     	startManagingCursor(model);
     	adapter = new MemberAdapter(model);
     	setListAdapter(adapter);
+    	
+    	Button button = (Button)findViewById(R.id.new_member);
+    	button.setOnClickListener(new OnClickListener ()
+        {
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(MemberListActivity.this, CreateMemberActivity.class);
+				startActivity(i);
+			}      	
+        });
 	}
 	
 	@Override
 	public void onListItemClick(ListView list, View view, int position, long id)
 	{
-		 Intent i = new Intent(MemberList.this, ProfileActivity.class);
+		 Intent i = new Intent(MemberListActivity.this, ProfileActivity.class);
 		 i.putExtra(ID_EXTRA, String.valueOf(id));
 		 startActivity(i);
 	}
@@ -48,6 +60,11 @@ public class MemberList extends ListActivity {
 	public void onDestroy()
 	{
 		super.onDestroy();
+		if(model!=null)
+		{
+			stopManagingCursor(model);
+			model.close();
+		}
 		helper.close();
 	}
 	
@@ -55,7 +72,7 @@ public class MemberList extends ListActivity {
   	{  	
 		MemberAdapter(Cursor c) 
 		{
-			super(MemberList.this, c);
+			super(MemberListActivity.this, c);
 		}
 	  	
 		@Override
