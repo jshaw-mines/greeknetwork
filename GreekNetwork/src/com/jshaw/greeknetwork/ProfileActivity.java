@@ -26,6 +26,7 @@ public class ProfileActivity extends Activity {
 		
 		helper = new GreekHelper(this);
 		c = helper.getMember(id);
+		c.moveToFirst();
 		
 		name = (TextView)findViewById(R.id.name);
 		year = (TextView)findViewById(R.id.year);

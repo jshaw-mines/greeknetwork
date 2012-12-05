@@ -19,12 +19,12 @@
         <TableRow>
             <TextView android:text="When:"/>
             <DatePicker
-                android:id="@+id/datePicker"
+                android:id="@+id/event_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </TableRow>
         
-        <EditText android:id="@+id/details"
+        <EditText android:id="@+id/event_details"
              	android:inputType="textMultiLine"
              	android:gravity="top"
              	android:lines="3"
