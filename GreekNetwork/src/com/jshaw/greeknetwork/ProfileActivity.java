@@ -1,8 +1,12 @@
 package com.jshaw.greeknetwork;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class ProfileActivity extends Activity {
@@ -12,6 +16,7 @@ public class ProfileActivity extends Activity {
 	private TextView pos;
 	private TextView comments;
 	private TextView number;
+	private Button send;
 	
 	private String id;
 	private GreekHelper helper;
@@ -34,12 +39,22 @@ public class ProfileActivity extends Activity {
 		pos = (TextView)findViewById(R.id.position);
 		comments = (TextView)findViewById(R.id.comments);
 		number = (TextView)findViewById(R.id.number);
+		send = (Button)findViewById(R.id.send_message);
 		
 		name.setText(helper.getName(c));
 		year.setText(helper.getYear(c));
 		pos.setText(helper.getPos(c));
 		comments.setText(helper.getComments(c));
 		number.setText(helper.getNumber(c));
+		
+		send.setOnClickListener(new OnClickListener() 
+        {
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(ProfileActivity.this, SendMessageActivity.class);
+				startActivity(i);
+			}	
+        });
 		
 		c.close();
 		helper.close();

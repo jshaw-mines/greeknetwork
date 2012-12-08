@@ -34,7 +34,8 @@
             <TextView android:text="Number:"/>
             <EditText 
                 android:id="@+id/member_number"
-                android:layout_span="3"/>
+                android:layout_span="3"
+                android:inputType="phone"/>
         </TableRow>
         
         <EditText android:id="@+id/member_comments"
