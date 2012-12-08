@@ -24,9 +24,16 @@
         </TableRow>
         
         <TableRow>
-            <TextView android:text="Position"/>
+            <TextView android:text="Position:"/>
             <EditText 
                 android:id="@+id/member_pos"
+                android:layout_span="3"/>
+        </TableRow>
+        
+        <TableRow>
+            <TextView android:text="Number:"/>
+            <EditText 
+                android:id="@+id/member_number"
                 android:layout_span="3"/>
         </TableRow>
         

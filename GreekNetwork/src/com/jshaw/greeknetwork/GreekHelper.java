@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class GreekHelper extends SQLiteOpenHelper {
 
 	//database info
-	private static final int DATABASE_VERSION = 1;
+	private static final int DATABASE_VERSION = 2;
 	private static final String DATABASE_NAME = "greek.db";
 	
 	//table names
@@ -21,6 +21,7 @@ public class GreekHelper extends SQLiteOpenHelper {
 	public static final String YEAR = "year";
 	public static final String POS = "posistion";
 	public static final String COMMENTS = "comments";
+	public static final String NUMBER = "phone_number";
 	
 	//event columns
 	public static final String EVENT = "event_name";
@@ -29,7 +30,7 @@ public class GreekHelper extends SQLiteOpenHelper {
 	
 	//tables
 	private static final String CREATE_MEMBERS = "CREATE TABLE " + MEMBERS_TABLE + " (_id INTEGER PRIMARY KEY AUTOINCREMENT, " 
-							+ NAME + " TEXT, " + YEAR + " TEXT, "+POS+" TEXT, "+COMMENTS+" TEXT);";
+							+ NAME + " TEXT, " + YEAR + " TEXT, "+POS+" TEXT, "+COMMENTS+" TEXT, "+NUMBER+" TEXT);";
 	private static final String CREATE_EVENTS = "CREATE TABLE " + EVENTS_TABLE + " (_id INTEGER PRIMARY KEY AUTOINCREMENT, " 
 							+ EVENT + " TEXT, " + DATE + " REAL, "+DETAILS+" TEXT);";
 	 
@@ -100,6 +101,7 @@ public class GreekHelper extends SQLiteOpenHelper {
 		values.put(GreekHelper.YEAR, m.getYear());
 		values.put(GreekHelper.POS, m.getPosition());
 		values.put(GreekHelper.COMMENTS, m.getComments());
+		values.put(GreekHelper.NUMBER, m.getNumber());
 		
 		getWritableDatabase().insert(GreekHelper.MEMBERS_TABLE, null, values);
 	}
@@ -114,6 +116,7 @@ public class GreekHelper extends SQLiteOpenHelper {
 		values.put(GreekHelper.YEAR, m.getYear());
 		values.put(GreekHelper.POS, m.getPosition());
 		values.put(GreekHelper.COMMENTS, m.getComments());
+		values.put(GreekHelper.NUMBER, m.getNumber());
 		
 		getWritableDatabase().update(MEMBERS_TABLE, values, "_ID = ?", args);		
 	}
@@ -160,6 +163,11 @@ public class GreekHelper extends SQLiteOpenHelper {
 	public String getComments(Cursor c)
 	{
 		return c.getString(4);
+	}
+	
+	public String getNumber(Cursor c)
+	{
+		return c.getString(5);
 	}
 
 	public long getDate(Cursor c)

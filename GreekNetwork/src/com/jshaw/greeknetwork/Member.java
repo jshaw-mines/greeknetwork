@@ -6,23 +6,26 @@ public class Member {
 	private String year;
 	private String position;
 	private String comments;
+	private String number;
 	private int ID;
 	
-	public Member(String name, String year, String position, String comments, int iD) 
+	public Member(String name, String year, String position, String comments, String number, int iD) 
 	{
 		this.name = name;
 		this.year = year;
 		this.position = position;
 		this.comments = comments;
+		this.number = number;
 		ID = iD;
 	}
 	
-	public Member(String name, String year, String position, String comments) 
+	public Member(String name, String year, String position, String comments, String number) 
 	{
 		this.name = name;
 		this.year = year;
 		this.position = position;
 		this.comments = comments;
+		this.number = number;
 	}
 	
 	public String getName() 
@@ -63,6 +66,16 @@ public class Member {
 	public void setComments(String comments) 
 	{
 		this.comments = comments;
+	}
+	
+	public String getNumber() 
+	{
+		return number;
+	}
+	
+	public void setNumber(String number) 
+	{
+		this.number = number;
 	}
 	
 	public int getID() 

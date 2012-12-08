@@ -15,6 +15,7 @@ public class CreateMemberActivity extends Activity {
 	EditText year;
 	EditText pos;
 	EditText comments;
+	EditText number;
 	GreekHelper helper;
 	
 	@Override
@@ -29,13 +30,14 @@ public class CreateMemberActivity extends Activity {
 		year = (EditText)findViewById(R.id.member_year);
 		pos = (EditText)findViewById(R.id.member_pos);
 		comments = (EditText)findViewById(R.id.member_comments);
+		number = (EditText) findViewById(R.id.member_number);
 		
 		Button accept = (Button) findViewById(R.id.accept_member);
 		accept.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View view) {
-				Member m = new Member(name.getText().toString(), year.getText().toString(), pos.getText().toString(), comments.getText().toString());
+				Member m = new Member(name.getText().toString(), year.getText().toString(), pos.getText().toString(), comments.getText().toString(), number.getText().toString());
 				helper.insertMember(m);
 				
 				Toast.makeText(view.getContext(), "New Member Saved", Toast.LENGTH_SHORT).show();

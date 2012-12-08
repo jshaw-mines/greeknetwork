@@ -11,6 +11,7 @@ public class ProfileActivity extends Activity {
 	private TextView year;
 	private TextView pos;
 	private TextView comments;
+	private TextView number;
 	
 	private String id;
 	private GreekHelper helper;
@@ -32,11 +33,13 @@ public class ProfileActivity extends Activity {
 		year = (TextView)findViewById(R.id.year);
 		pos = (TextView)findViewById(R.id.position);
 		comments = (TextView)findViewById(R.id.comments);
+		number = (TextView)findViewById(R.id.number);
 		
 		name.setText(helper.getName(c));
 		year.setText(helper.getYear(c));
 		pos.setText(helper.getPos(c));
 		comments.setText(helper.getComments(c));
+		number.setText(helper.getNumber(c));
 		
 		c.close();
 		helper.close();
