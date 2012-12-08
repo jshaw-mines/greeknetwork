@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 public class ProfileActivity extends Activity {
 
+	public static final String NUMBER_EXTRA = "com.jshaw.greeknetwork.NUMBER";
+	
 	private TextView name;
 	private TextView year;
 	private TextView pos;
@@ -52,10 +54,15 @@ public class ProfileActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(ProfileActivity.this, SendMessageActivity.class);
+				i.putExtra(ProfileActivity.NUMBER_EXTRA, helper.getNumber(c));
 				startActivity(i);
 			}	
-        });
-		
+        });		
+	}
+	
+	public void onDestroy()
+	{
+		super.onDestroy();
 		c.close();
 		helper.close();
 	}
