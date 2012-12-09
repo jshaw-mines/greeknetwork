@@ -77,7 +77,7 @@ public class GreekHelper extends SQLiteOpenHelper {
 	
 	public void deleteOldMessages()
 	{
-		getWritableDatabase().delete(EVENTS_TABLE, DATE, null);
+		getWritableDatabase().delete(MESSAGES_TABLE, DATE, null);
 	}
 	
 	public void deleteMember(int id)

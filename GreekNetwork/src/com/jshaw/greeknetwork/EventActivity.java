@@ -7,6 +7,7 @@ import java.util.Date;
 import android.app.Activity;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class EventActivity extends Activity {
@@ -14,6 +15,7 @@ public class EventActivity extends Activity {
 	private TextView name;
 	private TextView date;
 	private TextView details;
+	private Button notify;
 	
 	private String id;
 	private GreekHelper helper;
@@ -34,6 +36,7 @@ public class EventActivity extends Activity {
 		name = (TextView)findViewById(R.id.name);
 		date = (TextView)findViewById(R.id.date);
 		details = (TextView)findViewById(R.id.detials);
+		notify = (Button)findViewById(R.id.notify_all);
 		
 		name.setText(helper.getName(c));
 		date.setText(DateFormat.getInstance().format(new Date(helper.getDate(c))));

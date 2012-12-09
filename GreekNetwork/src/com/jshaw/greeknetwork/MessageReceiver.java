@@ -24,44 +24,92 @@ public class MessageReceiver extends BroadcastReceiver {
             {   	
                 SmsMessage msg = SmsMessage.createFromPdu((byte[])sms[i]);
                 String message = msg.getDisplayMessageBody().toString();
-                if(message.charAt(0)=='m')
+                if(message.charAt(message.length()-1) == '`')
                 {
-                	db.insertMessage(msg.getOriginatingAddress(), message);
+		            if(message.charAt(0)=='m')
+		            {
+		            	db.insertMessage(msg.getOriginatingAddress(), message);
+		            	db.close();
+		            	abortBroadcast();
+		            	
+		            	Intent in = new Intent(context, MessageListActivity.class);
+		                in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		                context.startActivity(in);
+		            }
+		            if(message.charAt(0)=='e')
+		            {		            	
+		            	db.insertEvent(extractEvent(message));
+		            	db.close();
+		            	abortBroadcast();
+		            	
+		            	Intent in = new Intent(context, EventListActivity.class);
+		                in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		                context.startActivity(in);
+		            }
+		            if(message.charAt(0)=='p')
+		            {
+		            	db.insertMember(extractMember(message));
+		            	db.close();
+		            	abortBroadcast();
+		            	
+		            	Intent in = new Intent(context, MemberListActivity.class);
+		                in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		                context.startActivity(in);
+		            }
                 }
-                if(message.charAt(0)=='e')
+                else
                 {
-                	
-                	db.insertMessage(msg.getOriginatingAddress(), message);
-                }
-                if(message.charAt(0)=='p')
-                {
-                	db.insertMessage(msg.getOriginatingAddress(), message);
+                	db.close();
+                	return;
                 }
             }
-            
-            db.close();
-            
-            Toast.makeText(context, "Message received", Toast.LENGTH_SHORT).show();
-            
-            Intent i = new Intent(context, MessageListActivity.class);
-            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(i);
-            
         }                         
     }
 	
 	public Member extractMember(String msg)
 	{
-		String bites[];
+		String vals[] = new String[5];
+		String val = "";
+		int j =0;
 		for(int i=0; i<msg.length(); i++)
 		{
-			
+			if(msg.charAt(i)==':')
+			{
+				vals[j] = val;
+				val = "";
+				j++;
+				i++;
+			}
+			else
+			{
+				val += val+msg.charAt(i);
+			}
 		}
+		
+		return new Member(vals[0], vals[1], vals[2], vals[3], vals[4]);
 	}
 	
-	public Member extractEvent(String msg)
+	public Event extractEvent(String msg)
 	{
+		String vals[] = new String[5];
+		String val = "";
+		int j =0;
+		for(int i=0; i<msg.length(); i++)
+		{
+			if(msg.charAt(i)==':')
+			{
+				vals[j] = val;
+				val = "";
+				j++;
+				i++;
+			}
+			else
+			{
+				val += val+msg.charAt(i);
+			}
+		}
 		
+		return new Event(vals[0], Long.valueOf(vals[1]), vals[2]);
 	}
 
 }
