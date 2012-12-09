@@ -37,7 +37,9 @@ public class SendMessageActivity extends Activity {
                 {
 	                if(m.length()>0)                
 	                {
-	                	sendSMS(number, m);                
+	                	sendSMS(number, m);
+	                	Toast.makeText(getBaseContext(),"Message sent.", Toast.LENGTH_SHORT).show();
+	                	finish();
 	                }
 	                else
 	                {
@@ -53,10 +55,9 @@ public class SendMessageActivity extends Activity {
 		});
 	}
 	
-	private void sendSMS(String number, String m) {
-		PendingIntent pi = PendingIntent.getActivity(this, 0, new Intent(SendMessageActivity.this, ReceiveMessage.class), 0);                
-	    SmsManager sms = SmsManager.getDefault();
-	    sms.sendTextMessage(number, null, m, pi, null);   
-		
+	private void sendSMS(String number, String m) {               
+			PendingIntent pi = PendingIntent.getActivity(this, 0, new Intent(this, MessageReceiver.class), 0);                
+	        SmsManager sms = SmsManager.getDefault();
+	        sms.sendTextMessage(number, null, m, pi, null);     
 	}
 }

@@ -15,6 +15,7 @@ public class GreekHelper extends SQLiteOpenHelper {
 	//table names
 	public static final String MEMBERS_TABLE = "members";
 	public static final String EVENTS_TABLE = "events";
+	public static final String MESSAGES_TABLE = "messages";
 	
 	//member columns
 	public static final String NAME = "member_name";
@@ -28,11 +29,18 @@ public class GreekHelper extends SQLiteOpenHelper {
 	public static final String DATE = "event_date";
 	public static final String DETAILS = "details";
 	
+	//messages columns
+	public static final String SENDER = "sender";
+	public static final String MESSAGE = "message";
+	
+	
 	//tables
 	private static final String CREATE_MEMBERS = "CREATE TABLE " + MEMBERS_TABLE + " (_id INTEGER PRIMARY KEY AUTOINCREMENT, " 
 							+ NAME + " TEXT, " + YEAR + " TEXT, "+POS+" TEXT, "+COMMENTS+" TEXT, "+NUMBER+" TEXT);";
 	private static final String CREATE_EVENTS = "CREATE TABLE " + EVENTS_TABLE + " (_id INTEGER PRIMARY KEY AUTOINCREMENT, " 
 							+ EVENT + " TEXT, " + DATE + " REAL, "+DETAILS+" TEXT);";
+	private static final String CREATE_MESSAGES = "CREATE TABLE " + MESSAGES_TABLE + " (_id INTEGER PRIMARY KEY AUTOINCREMENT, " 
+							+ SENDER + " TEXT, " + MESSAGE + " TEXT);";
 	 
 	public GreekHelper(Context context) 
 	{
@@ -43,12 +51,14 @@ public class GreekHelper extends SQLiteOpenHelper {
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(CREATE_MEMBERS);
 		db.execSQL(CREATE_EVENTS);
+		db.execSQL(CREATE_MESSAGES);
 	}
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int arg1, int arg2) {
 		db.execSQL("DROP TABLE "+ MEMBERS_TABLE+";");
 		db.execSQL("DROP TABLE "+ EVENTS_TABLE+";");
+		db.execSQL("DROP TABLE "+ MESSAGES_TABLE+";");
 		onCreate(db);
 	}
 	
@@ -56,9 +66,16 @@ public class GreekHelper extends SQLiteOpenHelper {
 	{
 		getWritableDatabase().delete(MEMBERS_TABLE, null, null);
 		getWritableDatabase().delete(EVENTS_TABLE, null, null);
+		getWritableDatabase().delete(MESSAGES_TABLE, null, null);
 	}
 	
 	public void deleteOldEvents(long exp)
+	{
+		String[] temp = {String.valueOf(exp)};
+		getWritableDatabase().delete(EVENTS_TABLE, DATE+" < ?", temp);
+	}
+	
+	public void deleteOldMessages(long exp)
 	{
 		String[] temp = {String.valueOf(exp)};
 		getWritableDatabase().delete(EVENTS_TABLE, DATE+" < ?", temp);
@@ -73,6 +90,11 @@ public class GreekHelper extends SQLiteOpenHelper {
 	public Cursor getMembers()
 	{
 		return getReadableDatabase().rawQuery("SELECT * FROM "+MEMBERS_TABLE+" ORDER BY member_name ASC", null);	
+	}
+	
+	public Cursor getMessages()
+	{
+		return getReadableDatabase().rawQuery("SELECT * FROM "+MESSAGES_TABLE, null);	
 	}
 	
 	public Cursor getMember(String id)
@@ -143,6 +165,16 @@ public class GreekHelper extends SQLiteOpenHelper {
 		values.put(GreekHelper.DETAILS, e.getDetails());
 		
 		getWritableDatabase().update(EVENTS_TABLE, values, "_ID = ?", args);		
+	}
+	
+	public void insertMessage(String sender, String message)
+	{
+		ContentValues values = new ContentValues();
+		
+		values.put(GreekHelper.SENDER, sender);
+		values.put(GreekHelper.MESSAGE, message);
+		
+		getWritableDatabase().insert(GreekHelper.MESSAGES_TABLE, null, values);
 	}
 
 	public String getName(Cursor c)

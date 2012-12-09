@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.telephony.SmsMessage;
+import android.widget.Toast;
 
 public class MessageReceiver extends BroadcastReceiver {
 
@@ -12,26 +13,24 @@ public class MessageReceiver extends BroadcastReceiver {
 	
 	@Override
 	public void onReceive(Context context, Intent intent) 
-	{    
-		
+	{    		
         Bundle bundle = intent.getExtras();        
-        SmsMessage[] msgs = null;
-        String str = "";            
+        GreekHelper db = new GreekHelper(context);
         if (bundle != null)
         {
-            Object[] pdus = (Object[]) bundle.get("pdus");
-            msgs = new SmsMessage[pdus.length];       
+            Object[] sms = (Object[]) bundle.get("pdus");
             
-            for (int i=0; i<msgs.length; i++)
+            for (int i=0; i<sms.length; i++)
             {
-                msgs[i] = SmsMessage.createFromPdu((byte[])pdus[i]);                
-                str += "Message from " + msgs[i].getOriginatingAddress();                     
-                str += ": ";
-                str += msgs[i].getMessageBody().toString();    
+            	
+                SmsMessage msg = SmsMessage.createFromPdu((byte[])sms[i]);
+                db.insertMessage(msg.getOriginatingAddress(), msg.getDisplayMessageBody().toString());
             }
             
-            intent.putExtra(MessageReceiver.MESSAGE_EXTRA, str);
-            context.startActivity(intent);
+            db.close();
+            
+            Toast.makeText(context, "Message received", Toast.LENGTH_SHORT).show();
+            
         }                         
     }
 
