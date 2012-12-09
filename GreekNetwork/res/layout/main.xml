@@ -12,12 +12,20 @@
   	android:layout_centerHorizontal="true"
   	android:textAppearance="?android:attr/textAppearanceLarge" />
   	
+    <Button 
+  	android:id="@+id/view_message_list"
+  	android:text="View Message List"
+  	android:layout_height="wrap_content"
+  	android:layout_width="wrap_content"
+  	android:layout_below="@id/welcome_text"
+  	android:layout_centerHorizontal="true"/>
+    
   	<Button 
   	android:id="@+id/view_member_list"
   	android:text="View Members List"
   	android:layout_height="wrap_content"
   	android:layout_width="wrap_content"
-  	android:layout_below="@id/welcome_text"
+  	android:layout_below="@id/view_message_list"
   	android:layout_centerHorizontal="true"/>
     
     <Button 

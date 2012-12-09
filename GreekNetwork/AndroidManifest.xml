@@ -27,6 +27,7 @@
         <activity android:name=".ProfileActivity"></activity>
         <activity android:name=".EventActivity"></activity>
         <activity android:name=".SendMessageActivity"></activity>
+        <activity android:name=".MessageListActivity"></activity>
         <receiver android:name=".MessageReceiver"> 
             <intent-filter> 
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" /> 

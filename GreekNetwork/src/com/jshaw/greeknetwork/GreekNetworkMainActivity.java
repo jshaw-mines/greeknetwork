@@ -35,5 +35,15 @@ public class GreekNetworkMainActivity extends Activity
 				startActivity(i);
 			}      	
         });
+        
+        Button messages = (Button)findViewById(R.id.view_message_list);
+        messages.setOnClickListener(new OnClickListener ()
+        {
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(GreekNetworkMainActivity.this, MessageListActivity.class);
+				startActivity(i);
+			}      	
+        });
     }
 }

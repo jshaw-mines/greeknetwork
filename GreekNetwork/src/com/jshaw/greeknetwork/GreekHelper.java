@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class GreekHelper extends SQLiteOpenHelper {
 
 	//database info
-	private static final int DATABASE_VERSION = 2;
+	private static final int DATABASE_VERSION = 3;
 	private static final String DATABASE_NAME = "greek.db";
 	
 	//table names
@@ -56,9 +56,9 @@ public class GreekHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int arg1, int arg2) {
-		db.execSQL("DROP TABLE "+ MEMBERS_TABLE+";");
-		db.execSQL("DROP TABLE "+ EVENTS_TABLE+";");
-		db.execSQL("DROP TABLE "+ MESSAGES_TABLE+";");
+		db.execSQL("DROP TABLE IF EXISTS "+ MEMBERS_TABLE+";");
+		db.execSQL("DROP TABLE IF EXISTS "+ EVENTS_TABLE+";");
+		db.execSQL("DROP TABLE IF EXISTS "+ MESSAGES_TABLE+";");
 		onCreate(db);
 	}
 	
@@ -75,10 +75,9 @@ public class GreekHelper extends SQLiteOpenHelper {
 		getWritableDatabase().delete(EVENTS_TABLE, DATE+" < ?", temp);
 	}
 	
-	public void deleteOldMessages(long exp)
+	public void deleteOldMessages()
 	{
-		String[] temp = {String.valueOf(exp)};
-		getWritableDatabase().delete(EVENTS_TABLE, DATE+" < ?", temp);
+		getWritableDatabase().delete(EVENTS_TABLE, DATE, null);
 	}
 	
 	public void deleteMember(int id)
@@ -94,7 +93,7 @@ public class GreekHelper extends SQLiteOpenHelper {
 	
 	public Cursor getMessages()
 	{
-		return getReadableDatabase().rawQuery("SELECT * FROM "+MESSAGES_TABLE, null);	
+		return getReadableDatabase().rawQuery("SELECT * FROM "+MESSAGES_TABLE+" ORDER BY _id DESC", null);	
 	}
 	
 	public Cursor getMember(String id)

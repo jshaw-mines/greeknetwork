@@ -21,17 +21,47 @@ public class MessageReceiver extends BroadcastReceiver {
             Object[] sms = (Object[]) bundle.get("pdus");
             
             for (int i=0; i<sms.length; i++)
-            {
-            	
+            {   	
                 SmsMessage msg = SmsMessage.createFromPdu((byte[])sms[i]);
-                db.insertMessage(msg.getOriginatingAddress(), msg.getDisplayMessageBody().toString());
+                String message = msg.getDisplayMessageBody().toString();
+                if(message.charAt(0)=='m')
+                {
+                	db.insertMessage(msg.getOriginatingAddress(), message);
+                }
+                if(message.charAt(0)=='e')
+                {
+                	
+                	db.insertMessage(msg.getOriginatingAddress(), message);
+                }
+                if(message.charAt(0)=='p')
+                {
+                	db.insertMessage(msg.getOriginatingAddress(), message);
+                }
             }
             
             db.close();
             
             Toast.makeText(context, "Message received", Toast.LENGTH_SHORT).show();
             
+            Intent i = new Intent(context, MessageListActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(i);
+            
         }                         
     }
+	
+	public Member extractMember(String msg)
+	{
+		String bites[];
+		for(int i=0; i<msg.length(); i++)
+		{
+			
+		}
+	}
+	
+	public Member extractEvent(String msg)
+	{
+		
+	}
 
 }
