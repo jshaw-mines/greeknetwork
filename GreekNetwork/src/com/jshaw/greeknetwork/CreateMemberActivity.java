@@ -40,12 +40,15 @@ public class CreateMemberActivity extends Activity {
 		if(id != null)
 		{			
 			Cursor c = helper.getMember(id);
+			c.moveToFirst();
 			
 			name.setText(helper.getName(c));
 			year.setText(helper.getYear(c));
 			pos.setText(helper.getPos(c));
 			comments.setText(helper.getComments(c));
 			number.setText(helper.getNumber(c));
+			
+			c.close();
 			
 			Button delete = (Button)findViewById(R.id.delete_member);
 			delete.setVisibility(0);
@@ -74,9 +77,12 @@ public class CreateMemberActivity extends Activity {
 				
 				if(id != null)
 				{
-					Member mem = new Member(name.getText().toString(), year.getText().toString(), pos.getText().toString(), comments.getText().toString(), number.getText().toString());
+					Member mem = new Member(name.getText().toString(), year.getText().toString(), pos.getText().toString(), comments.getText().toString(), number.getText().toString(), Integer.valueOf(id));
 					helper.updateMember(mem);
 					Toast.makeText(view.getContext(), "Member Edited", Toast.LENGTH_SHORT).show();
+					Intent i = new Intent(view.getContext(), ProfileActivity.class);
+					i.putExtra(MemberListActivity.ID_EXTRA, id);
+					startActivity(i);
 				}
 				else
 				{
