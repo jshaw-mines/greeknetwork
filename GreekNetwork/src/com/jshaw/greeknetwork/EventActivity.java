@@ -22,6 +22,7 @@ public class EventActivity extends Activity {
 	private TextView date;
 	private TextView details;
 	private Button notify;
+	private Button edit;
 	
 	private Long time;
 	
@@ -45,6 +46,7 @@ public class EventActivity extends Activity {
 		date = (TextView)findViewById(R.id.date);
 		details = (TextView)findViewById(R.id.detials);
 		notify = (Button)findViewById(R.id.notify_all);
+		edit = (Button)findViewById(R.id.edit_event);
 		
 		name.setText(helper.getName(c));
 		date.setText(DateFormat.getInstance().format(new Date(helper.getDate(c))));
@@ -81,6 +83,16 @@ public class EventActivity extends Activity {
             	finish();
 			}
 		});
+		
+		edit.setOnClickListener(new OnClickListener() 
+        {
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(EventActivity.this, CreateEventActivity.class);
+				i.putExtra(MemberListActivity.ID_EXTRA, id);
+				startActivity(i);
+			}
+        });	
 		
 		c.close();
 		helper.close();

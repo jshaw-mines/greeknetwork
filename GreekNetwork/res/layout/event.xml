@@ -31,5 +31,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Notify All"/>
+     
+     <Button 
+        android:id="@+id/edit_event"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Edit"/>
          
      </LinearLayout>

@@ -53,6 +53,12 @@
             android:id="@+id/accept_member"
             android:text="Accept"
             android:layout_width="wrap_content"/>
+        
+        <Button
+            android:id="@+id/delete_member"
+            android:text="Delete"
+            android:layout_width="wrap_content"
+            android:visibility="gone"/>
     </TableLayout>
 
     

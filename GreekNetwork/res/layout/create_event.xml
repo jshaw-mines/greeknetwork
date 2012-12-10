@@ -36,6 +36,12 @@
             android:id="@+id/accept_event"
             android:text="Accept"
             android:layout_width="wrap_content"/>
+        
+        <Button
+            android:id="@+id/delete_event"
+            android:text="Delete"
+            android:layout_width="wrap_content"
+            android:visibility="gone"/>
     </TableLayout>
 
     

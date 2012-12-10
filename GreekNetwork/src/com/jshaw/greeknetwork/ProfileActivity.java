@@ -22,6 +22,7 @@ public class ProfileActivity extends Activity {
 	private TextView comments;
 	private TextView number;
 	private Button send;
+	private Button edit;
 	
 	private String id;
 	private GreekHelper helper;
@@ -45,6 +46,7 @@ public class ProfileActivity extends Activity {
 		comments = (TextView)findViewById(R.id.comments);
 		number = (TextView)findViewById(R.id.number);
 		send = (Button)findViewById(R.id.send_message);
+		edit = (Button)findViewById(R.id.edit_member);
 		
 		name.setText(helper.getName(c));
 		year.setText(helper.getYear(c));
@@ -58,6 +60,16 @@ public class ProfileActivity extends Activity {
 			public void onClick(View v) {
 				Intent i = new Intent(ProfileActivity.this, SendMessageActivity.class);
 				i.putExtra(ProfileActivity.NUMBER_EXTRA, helper.getNumber(c));
+				startActivity(i);
+			}
+        });	
+		
+		edit.setOnClickListener(new OnClickListener() 
+        {
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(ProfileActivity.this, CreateMemberActivity.class);
+				i.putExtra(MemberListActivity.ID_EXTRA, id);
 				startActivity(i);
 			}
         });	
