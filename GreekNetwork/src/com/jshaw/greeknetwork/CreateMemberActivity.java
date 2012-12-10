@@ -103,7 +103,10 @@ public class CreateMemberActivity extends Activity {
 						
 						PendingIntent pi = PendingIntent.getActivity(CreateMemberActivity.this, 0, new Intent(CreateMemberActivity.this, MessageReceiver.class), 0);     
 						SmsManager sms = SmsManager.getDefault();
-				        sms.sendTextMessage(number, null, m, pi, null);
+						if(number!=null)
+						{
+							sms.sendTextMessage(number, null, m, pi, null);
+						}
 				        
 				        members.moveToNext();
 					}

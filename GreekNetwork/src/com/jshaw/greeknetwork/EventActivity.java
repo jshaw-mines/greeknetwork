@@ -72,7 +72,7 @@ public class EventActivity extends Activity {
 					PendingIntent pi = PendingIntent.getActivity(EventActivity.this, 0, new Intent(EventActivity.this, MessageReceiver.class), 0); 
 					
 					SmsManager sms = SmsManager.getDefault();
-					if(number.length()>0)
+					if(number!=null)
 					{
 						sms.sendTextMessage(number, null, m, pi, null);
 					}
