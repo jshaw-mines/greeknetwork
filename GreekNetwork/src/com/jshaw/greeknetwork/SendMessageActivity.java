@@ -35,7 +35,7 @@ public class SendMessageActivity extends Activity {
                 
                 if (number.length()>0)
                 {
-	                if(m.length()>0)                
+	                if(m.length()==10)                
 	                {
 	                	m = "&m"+m;	                	
 	                	sendSMS(number, m);
