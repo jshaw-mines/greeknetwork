@@ -75,9 +75,10 @@ public class GreekHelper extends SQLiteOpenHelper {
 		getWritableDatabase().delete(EVENTS_TABLE, DATE+" < ?", temp);
 	}
 	
-	public void deleteEvent()
+	public void deleteEvent(String id)
 	{
-		getWritableDatabase().delete(EVENTS_TABLE, null, null);
+		String[] temp =  {id};
+		getWritableDatabase().delete(EVENTS_TABLE, "_id = ?", temp);
 	}
 	
 	public void deleteOldMessages()
@@ -88,7 +89,7 @@ public class GreekHelper extends SQLiteOpenHelper {
 	public void deleteMember(String id)
 	{
 		String[] temp =  {id};
-		getWritableDatabase().delete(EVENTS_TABLE, "_id = ?", temp);
+		getWritableDatabase().delete(MEMBERS_TABLE, "_id = ?", temp);
 	}
 	
 	public Cursor getMembers()

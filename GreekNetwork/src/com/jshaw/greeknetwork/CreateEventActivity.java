@@ -1,6 +1,7 @@
 package com.jshaw.greeknetwork;
 
 import java.util.Calendar;
+import java.util.Date;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -40,13 +41,14 @@ public class CreateEventActivity extends Activity {
 			c.moveToFirst();
 			
 			Calendar cal=Calendar.getInstance();
+			Date d = new Date(helper.getDate(c));
 			cal.setTimeInMillis(helper.getDate(c));
 
-			int year=cal.get(Calendar.YEAR);
+			int year=d.getYear();
 			int month=cal.get(Calendar.MONTH);
 			int day=cal.get(Calendar.DAY_OF_MONTH);
-
-			date.updateDate(year, month, day);
+			
+			date.updateDate(d.getYear(), d.getMonth(), d.getDate());
 			name.setText(helper.getName(c));
 			details.setText(helper.getDetails(c));
 			
@@ -58,7 +60,7 @@ public class CreateEventActivity extends Activity {
 			{
 				@Override
 				public void onClick(View v) {
-					helper.deleteEvent();
+					helper.deleteEvent(id);
 					Toast.makeText(v.getContext(), "Event Deleted", Toast.LENGTH_SHORT).show();
 					Intent i = new Intent(v.getContext(), EventListActivity.class);
 					startActivity(i);
