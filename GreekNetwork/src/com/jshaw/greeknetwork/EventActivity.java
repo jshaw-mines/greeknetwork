@@ -5,10 +5,16 @@ import java.util.Calendar;
 import java.util.Date;
 
 import android.app.Activity;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.telephony.SmsManager;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class EventActivity extends Activity {
 
@@ -41,6 +47,36 @@ public class EventActivity extends Activity {
 		name.setText(helper.getName(c));
 		date.setText(DateFormat.getInstance().format(new Date(helper.getDate(c))));
 		details.setText(helper.getPos(c));
+		
+		notify.setOnClickListener(new OnClickListener()
+		{			
+			@Override
+			public void onClick(View v)
+			{
+				Calendar cal = Calendar.getInstance();
+				String m;	      
+				m = "&e"+name.getText().toString()+":"+date.getText().toString()+":"+details.getText().toString()+":";
+
+				Cursor members = helper.getMembers();
+				members.moveToFirst();
+				while(!members.isAfterLast())
+				{
+					String number = helper.getNumber(members);
+					
+					PendingIntent pi = PendingIntent.getActivity(EventActivity.this, 0, new Intent(EventActivity.this, MessageReceiver.class), 0); 
+					
+					SmsManager sms = SmsManager.getDefault();
+					if(number.length()>0)
+					{
+						sms.sendTextMessage(number, null, m, pi, null);
+					}
+			        
+			        members.moveToNext();
+				}
+            	Toast.makeText(getBaseContext(),"Members Notified", Toast.LENGTH_SHORT).show();
+            	finish();
+			}
+		});
 		
 		c.close();
 		helper.close();

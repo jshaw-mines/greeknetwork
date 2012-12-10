@@ -37,7 +37,7 @@ public class SendMessageActivity extends Activity {
                 {
 	                if(m.length()>0)                
 	                {
-	                	m = "m"+m+"`";	                	
+	                	m = "&m"+m;	                	
 	                	sendSMS(number, m);
 	                	Toast.makeText(getBaseContext(),"Message sent.", Toast.LENGTH_SHORT).show();
 	                	finish();

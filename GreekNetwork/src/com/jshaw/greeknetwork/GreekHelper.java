@@ -108,13 +108,18 @@ public class GreekHelper extends SQLiteOpenHelper {
 		return getReadableDatabase().query(EVENTS_TABLE, null, DATE+" >= ?", temp, null, null, null);	
 	}
 	
+	public Cursor getEvents()
+	{
+		return getReadableDatabase().query(EVENTS_TABLE, null, null, null, null, null, null);	
+	}
+	
 	public Cursor getEvent(String id)
 	{
 		String[] temp =  {id};
 		return getReadableDatabase().query(EVENTS_TABLE, null, "_id = ?", temp, null, null, null);	
 	}
 	
-	public void insertMember(Member m)
+	public long insertMember(Member m)
 	{
 		ContentValues values = new ContentValues();
 		
@@ -124,7 +129,7 @@ public class GreekHelper extends SQLiteOpenHelper {
 		values.put(GreekHelper.COMMENTS, m.getComments());
 		values.put(GreekHelper.NUMBER, m.getNumber());
 		
-		getWritableDatabase().insert(GreekHelper.MEMBERS_TABLE, null, values);
+		return getWritableDatabase().insert(GreekHelper.MEMBERS_TABLE, null, values);
 	}
 	
 	public void updateMember(Member m) 

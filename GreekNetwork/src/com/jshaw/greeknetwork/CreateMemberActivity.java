@@ -1,8 +1,11 @@
 package com.jshaw.greeknetwork;
 
 import android.app.Activity;
+import android.app.PendingIntent;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -37,13 +40,29 @@ public class CreateMemberActivity extends Activity {
 
 			@Override
 			public void onClick(View view) {
-				Member m = new Member(name.getText().toString(), year.getText().toString(), pos.getText().toString(), comments.getText().toString(), number.getText().toString());
-				helper.insertMember(m);
+				Member mem = new Member(name.getText().toString(), year.getText().toString(), pos.getText().toString(), comments.getText().toString(), number.getText().toString());
+				helper.insertMember(mem);
 				
 				Toast.makeText(view.getContext(), "New Member Saved", Toast.LENGTH_SHORT).show();
 				
-				Intent i = new Intent(CreateMemberActivity.this, MemberListActivity.class);
-				startActivity(i);
+				String m;	      
+				m = "&p"+mem.getName()+":"+mem.getYear()+":"+mem.getPosition()+":"+mem.getComments()+":"+mem.getNumber()+":";
+		
+				Cursor members = helper.getMembers();
+				
+				members.moveToFirst();
+				while(!members.isAfterLast())
+				{
+					String number = helper.getNumber(members);
+					
+					PendingIntent pi = PendingIntent.getActivity(CreateMemberActivity.this, 0, new Intent(CreateMemberActivity.this, MessageReceiver.class), 0);     
+					SmsManager sms = SmsManager.getDefault();
+			        sms.sendTextMessage(number, null, m, pi, null);
+			        
+			        members.moveToNext();
+				}
+		    	Toast.makeText(getBaseContext(),"Members Notified", Toast.LENGTH_SHORT).show();
+		    	finish();
 			}
 			
 		});

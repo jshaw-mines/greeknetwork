@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.telephony.SmsMessage;
+import android.util.Log;
 import android.widget.Toast;
 
 public class MessageReceiver extends BroadcastReceiver {
@@ -24,33 +25,33 @@ public class MessageReceiver extends BroadcastReceiver {
             {   	
                 SmsMessage msg = SmsMessage.createFromPdu((byte[])sms[i]);
                 String message = msg.getDisplayMessageBody().toString();
-                if(message.charAt(message.length()-1) == '`')
+                if(message.charAt(0)=='&')
                 {
-		            if(message.charAt(0)=='m')
+		            if(message.charAt(1)=='m')
 		            {
-		            	db.insertMessage(msg.getOriginatingAddress(), message);
+		            	db.insertMessage(msg.getOriginatingAddress(), message.substring(2));
 		            	db.close();
-		            	abortBroadcast();
+		            	this.abortBroadcast();
 		            	
 		            	Intent in = new Intent(context, MessageListActivity.class);
 		                in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		                context.startActivity(in);
 		            }
-		            if(message.charAt(0)=='e')
-		            {		            	
-		            	db.insertEvent(extractEvent(message));
+		            if(message.charAt(1)=='e')
+		            {
+		            	db.insertEvent(extractEvent(message.substring(2)));
 		            	db.close();
-		            	abortBroadcast();
+		            	this.abortBroadcast();
 		            	
 		            	Intent in = new Intent(context, EventListActivity.class);
 		                in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		                context.startActivity(in);
 		            }
-		            if(message.charAt(0)=='p')
+		            if(message.charAt(1)=='p')
 		            {
-		            	db.insertMember(extractMember(message));
+		            	db.insertMember(extractMember(message.substring(2)));
 		            	db.close();
-		            	abortBroadcast();
+		            	this.abortBroadcast();
 		            	
 		            	Intent in = new Intent(context, MemberListActivity.class);
 		                in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -78,11 +79,10 @@ public class MessageReceiver extends BroadcastReceiver {
 				vals[j] = val;
 				val = "";
 				j++;
-				i++;
 			}
 			else
 			{
-				val += val+msg.charAt(i);
+				val += msg.charAt(i);
 			}
 		}
 		
@@ -91,7 +91,7 @@ public class MessageReceiver extends BroadcastReceiver {
 	
 	public Event extractEvent(String msg)
 	{
-		String vals[] = new String[5];
+		String vals[] = new String[3];
 		String val = "";
 		int j =0;
 		for(int i=0; i<msg.length(); i++)
@@ -99,13 +99,13 @@ public class MessageReceiver extends BroadcastReceiver {
 			if(msg.charAt(i)==':')
 			{
 				vals[j] = val;
+				System.out.println(vals[j]);
 				val = "";
 				j++;
-				i++;
 			}
 			else
 			{
-				val += val+msg.charAt(i);
+				val += msg.charAt(i);
 			}
 		}
 		
