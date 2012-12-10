@@ -40,6 +40,11 @@ public class CreateMemberActivity extends Activity {
 
 			@Override
 			public void onClick(View view) {
+				if(name.getText().toString().length()==0)
+				{
+					Toast.makeText(view.getContext(), "No name entered", Toast.LENGTH_SHORT).show();
+				}
+				
 				Member mem = new Member(name.getText().toString(), year.getText().toString(), pos.getText().toString(), comments.getText().toString(), number.getText().toString());
 				helper.insertMember(mem);
 				

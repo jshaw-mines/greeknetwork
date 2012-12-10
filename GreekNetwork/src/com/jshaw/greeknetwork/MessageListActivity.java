@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MessageListActivity extends ListActivity {
 
@@ -39,6 +40,7 @@ public class MessageListActivity extends ListActivity {
 			@Override
 			public void onClick(View v) {
 				helper.deleteOldMessages();
+				Toast.makeText(v.getContext(), "Messages cleared", Toast.LENGTH_SHORT).show();
 				Intent i = new Intent(MessageListActivity.this, GreekNetworkMainActivity.class);
 				startActivity(i);
 			}      	
