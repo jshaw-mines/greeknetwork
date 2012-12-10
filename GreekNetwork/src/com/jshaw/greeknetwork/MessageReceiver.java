@@ -14,7 +14,7 @@ public class MessageReceiver extends BroadcastReceiver {
 	
 	@Override
 	public void onReceive(Context context, Intent intent) 
-	{    		
+	{    
         Bundle bundle = intent.getExtras();        
         GreekHelper db = new GreekHelper(context);
         if (bundle != null)
@@ -30,8 +30,6 @@ public class MessageReceiver extends BroadcastReceiver {
 		            if(message.charAt(1)=='m')
 		            {
 		            	db.insertMessage(msg.getOriginatingAddress(), message.substring(2));
-		            	db.close();
-		            	this.abortBroadcast();
 		            	
 		            	Intent in = new Intent(context, MessageListActivity.class);
 		                in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -40,8 +38,6 @@ public class MessageReceiver extends BroadcastReceiver {
 		            if(message.charAt(1)=='e')
 		            {
 		            	db.insertEvent(extractEvent(message.substring(2)));
-		            	db.close();
-		            	this.abortBroadcast();
 		            	
 		            	Intent in = new Intent(context, EventListActivity.class);
 		                in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -50,20 +46,15 @@ public class MessageReceiver extends BroadcastReceiver {
 		            if(message.charAt(1)=='p')
 		            {
 		            	db.insertMember(extractMember(message.substring(2)));
-		            	db.close();
-		            	this.abortBroadcast();
 		            	
 		            	Intent in = new Intent(context, MemberListActivity.class);
 		                in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		                context.startActivity(in);
 		            }
-                }
-                else
-                {
-                	db.close();
-                	return;
+		            abortBroadcast();
                 }
             }
+            db.close();
         }                         
     }
 	

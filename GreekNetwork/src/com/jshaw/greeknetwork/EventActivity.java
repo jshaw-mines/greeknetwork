@@ -23,6 +23,8 @@ public class EventActivity extends Activity {
 	private TextView details;
 	private Button notify;
 	
+	private Long time;
+	
 	private String id;
 	private GreekHelper helper;
 	private Cursor c;
@@ -48,6 +50,8 @@ public class EventActivity extends Activity {
 		date.setText(DateFormat.getInstance().format(new Date(helper.getDate(c))));
 		details.setText(helper.getPos(c));
 		
+		time = helper.getDate(c);
+		
 		notify.setOnClickListener(new OnClickListener()
 		{			
 			@Override
@@ -55,7 +59,7 @@ public class EventActivity extends Activity {
 			{
 				Calendar cal = Calendar.getInstance();
 				String m;	      
-				m = "&e"+name.getText().toString()+":"+date.getText().toString()+":"+details.getText().toString()+":";
+				m = "&e"+name.getText().toString()+":"+String.valueOf(time)+":"+details.getText().toString()+":";
 
 				Cursor members = helper.getMembers();
 				members.moveToFirst();
