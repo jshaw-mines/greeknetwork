@@ -33,9 +33,9 @@ public class SendMessageActivity extends Activity {
 			{              
                 String m = text.getText().toString();
                 
-                if (number.length()>0)
+                if (number.length()==10)
                 {
-	                if(m.length()==10)                
+	                if(m.length()>0)                
 	                {
 	                	m = "&m"+m;	                	
 	                	sendSMS(number, m);
@@ -49,7 +49,7 @@ public class SendMessageActivity extends Activity {
                 }
                 else
                 {
-                    Toast.makeText(getBaseContext(),"Member does not have a phone number", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getBaseContext(),"Member does not have a valid phone number", Toast.LENGTH_LONG).show();
                 }     
 			}
 

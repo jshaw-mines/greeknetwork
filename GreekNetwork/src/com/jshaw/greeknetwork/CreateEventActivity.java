@@ -73,6 +73,11 @@ public class CreateEventActivity extends Activity {
 	
 			@Override
 			public void onClick(View view) {
+				
+				if(name.getText().toString().length()==0)
+				{
+					Toast.makeText(view.getContext(), "No name entered", Toast.LENGTH_SHORT).show();
+				}
 				if(id != null)
 				{
 					Calendar cal = Calendar.getInstance();
